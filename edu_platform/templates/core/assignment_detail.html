@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+{% block title %}Сдать ДЗ - {{ assignment.title }}{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">{{ assignment.title }}</h1>
+        </div>
+        <div class="card-body">
+            <p class="mb-2"><strong>Описание:</strong></p>
+            <p class="text-muted">{{ assignment.description }}</p>
+            <p class="mb-4">
+                <strong>Дэдлайн:</strong>
+                <span class="badge bg-danger">{{ assignment.deadline|date:"d M Y H:i" }}</span>
+            </p>
+
+            {% if not submission %}
+            <div class="alert alert-info">
+                <h5>Подтвердите вашу работу</h5>
+                <form method="post" enctype="multipart/form-data" class="mt-3">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_file" class="form-label">Загрузить файл с ДЗ</label>
+                        <input type="file" name="file" id="id_file" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Сдать</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="alert alert-success">
+                <h5>Ваше задание успешно отправлено!</h5>
+                <p><strong>Загруженный файл:</strong>
+                   <a href="{{ submission.file.url }}" download class="text-primary">Скачать</a></p>
+                {% if submission.grade %}
+                <p><strong>Оценка:</strong>
+                   <span class="badge bg-success">{{ submission.grade }}</span>
+                </p>
+                {% else %}
+                <p><strong>Оценка:</strong>
+                   <span class="text-muted">Еще не оценено</span>
+                </p>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="card-footer text-muted">
+            <a href="{% url 'course_detail' assignment.course.id %}" class="btn btn-secondary btn-sm">Вернуться к курсу</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

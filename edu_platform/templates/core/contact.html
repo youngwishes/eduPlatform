@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Свяжитесь с нами - Edu Platform{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Свяжитесь с нами</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Наши Контакты</h5>
+                    <p class="text-center"><i class="bi bi-envelope-fill text-primary me-2"></i>Email: <a href="mailto:contact@eduplatform.com">contact@eduplatform.com</a></p>
+                    <p class="text-center"><i class="bi bi-telephone-fill text-success me-2"></i>Телефон: <a href="tel:+1234567890">+123 456 7890</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col text-center">
+            <p>Или вы можете <a href="{% url 'home' %}" class="btn btn-outline-primary btn-sm">вернуться на главную страницу</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

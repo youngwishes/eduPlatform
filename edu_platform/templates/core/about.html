@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+
+{% block title %}О нас - Edu Platform{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">О нас</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <p class="text-center">
+                Добро пожаловать на <strong>Edu Platform</strong> — место, где обучение становится доступным и увлекательным.
+                Мы предоставляем широкий выбор курсов, учебных материалов и инструментов, чтобы помочь вам достичь ваших образовательных целей.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Наша миссия -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Наша миссия</h5>
+                    <p class="card-text">
+                        Мы стремимся сделать образование доступным для всех, независимо от места проживания и уровня подготовки.
+                        Наша платформа объединяет студентов и преподавателей для создания сообщества, которое вдохновляет на обучение.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Наши ценности -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Наши ценности</h5>
+                    <p class="card-text">
+                        Мы верим в силу знаний и поддерживаем честность, профессионализм и инновации в обучении.
+                        Наша команда работает, чтобы предложить лучший опыт для студентов и преподавателей.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Почему выбрать нас -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Почему выбрать нас</h5>
+                    <p class="card-text">
+                        Интерактивные курсы, опытные преподаватели и удобная платформа делают Edu Platform вашим идеальным выбором для обучения.
+                        Мы поддерживаем вас на каждом этапе пути.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ключевые факты -->
+    <div class="row mt-5">
+        <div class="col text-center">
+            <h3 class="mb-4">Ключевые факты</h3>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-3">
+            <h4 class="text-primary">10,000+</h4>
+            <p>Зарегистрированных студентов</p>
+        </div>
+        <div class="col-md-3">
+            <h4 class="text-primary">500+</h4>
+            <p>Курсов</p>
+        </div>
+        <div class="col-md-3">
+            <h4 class="text-primary">300+</h4>
+            <p>Опытных преподавателей</p>
+        </div>
+        <div class="col-md-3">
+            <h4 class="text-primary">100%</h4>
+            <p>Довольных студентов</p>
+        </div>
+    </div>
+
+    <!-- Контактная информация -->
+    <div class="row mt-5">
+        <div class="col text-center">
+            <p>Хотите узнать больше? Свяжитесь с нами на странице <a href="{% url 'contact' %}">"Свяжитесь с нами"</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

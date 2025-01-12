@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% block title %}{{ assignment.title }}{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">ДЗ по {{ assignment.title }}</h1>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Студент</th>
+                <th>Файл</th>
+                <th>Оценка</th>
+                <th>Статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission.student.username }}</td>
+                <td><a href="{{ submission.file.url }}" download>Скачать</a></td>
+                <td>
+                    {% if submission.grade %}
+                    <span class="badge bg-success">{{ submission.grade }}</span>
+                    {% else %}
+                    <span class="badge bg-warning text-dark">Без оценки</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not submission.grade %}
+                    <a href="{% url 'grade_submission' submission.id %}" class="btn btn-primary btn-sm">Проверить</a>
+                    {% else %}
+                    <span class="text-muted">Оценено</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

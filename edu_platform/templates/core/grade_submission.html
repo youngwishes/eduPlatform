@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% block title %}Grade Submission{% endblock %}
+{% block content %}
+<h1>Grade Submission</h1>
+<p><strong>Student:</strong> {{ submission.student.username }}</p>
+<p><strong>Assignment:</strong> {{ submission.assignment.title }}</p>
+<p><strong>File:</strong> <a href="{{ submission.file.url }}" download>Download</a></p>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_grade" class="form-label">Grade</label>
+        <input type="number" name="grade" id="id_grade" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Submit Grade</button>
+</form>
+{% endblock %}

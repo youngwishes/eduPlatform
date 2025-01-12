@@ -1,0 +1,67 @@
+{% extends "core/base.html" %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <!-- Заголовок курса -->
+    <div class="text-center mb-4">
+        <h1 class="text-primary">{{ course.title }}</h1>
+        {% if not enrolled %}
+        <p class="text-muted course-description-container">
+            {{ course.description }}
+        </p>
+        {% endif %}
+    </div>
+
+    {% if enrolled %}
+    <!-- Материалы курса -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Материалы</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for material in course.materials.all %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ material.title }}</span>
+                <a href="{{ material.file.url }}" class="btn btn-outline-success btn-sm" download>
+                    <i class="bi bi-download"></i> Скачать
+                </a>
+            </li>
+            {% empty %}
+            <li class="list-group-item text-muted">Материалы пока не добавлены.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Домашние задания -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Домашние задания</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for assignment in course.assignments.all %}
+            <li class="list-group-item">
+                <h5 class="text-primary">{{ assignment.title }}</h5>
+                <p class="text-muted">{{ assignment.description }}</p>
+                <p>
+                    <strong>Срок сдачи:</strong>
+                    <span class="badge bg-danger">{{ assignment.deadline|date:"d M Y H:i" }}</span>
+                </p>
+                <a href="{% url 'assignment_detail' assignment.id %}" class="btn btn-outline-primary btn-sm">
+                    <i class="bi bi-upload"></i> Сдать ДЗ
+                </a>
+            </li>
+            {% empty %}
+            <li class="list-group-item text-muted">Домашние задания пока не добавлены.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <!-- Кнопка записи на курс -->
+    <div class="text-center">
+        <a href="{% url 'enroll' course.id %}" class="btn btn-success btn-lg">
+            <i class="bi bi-box-arrow-in-right"></i> Записаться на курс
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

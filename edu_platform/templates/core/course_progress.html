@@ -1,0 +1,34 @@
+{% extends "core/base.html" %}
+{% block title %}Progress for {{ course.title }}{% endblock %}
+{% block content %}
+<h1>Progress for {{ course.title }}</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Progress</th>
+            <th>Graded Assignments</th>
+            <th>Total Assignments</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in progress_data %}
+        <tr>
+            <td>{{ data.student.username }}</td>
+            <td>{{ data.progress|floatformat:2 }}%</td>
+            <td>{{ data.graded_count }}</td>
+            <td>{{ data.total_assignments }}</td>
+            <td>
+                {% for submission in data.student.submissions.filter(assignment__course=course) %}
+                    {% if submission.grade is null %}
+                        <a href="{% url 'review_submission' submission.id %}" class="btn btn-primary btn-sm">Review</a>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
