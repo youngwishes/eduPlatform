@@ -1,0 +1,141 @@
+{% extends 'core/base.html' %}
+
+{% block title %}FAQ - Edu Platform{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h1 class="mb-3 text-primary">Часто задаваемые вопросы</h1>
+        <p class="text-muted">Найдите ответы на популярные вопросы</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8" id="faqAccordion">
+            <!-- FAQ Item 1 -->
+            <div class="card mb-3">
+                <div class="card-header bg-white p-0">
+                    <button class="btn btn-link text-primary text-decoration-none w-100 text-start p-3 faq-question">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Как записаться на курс?
+                    </button>
+                </div>
+                <div class="card-body faq-answer d-none">
+                    Для записи на курс необходимо зарегистрироваться на платформе, затем перейти на страницу интересующего вас курса и нажать кнопку "Записаться".
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="card mb-3">
+                <div class="card-header bg-white p-0">
+                    <button class="btn btn-link text-primary text-decoration-none w-100 text-start p-3 faq-question">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Кто проверяет мои ДЗ?
+                    </button>
+                </div>
+                <div class="card-body faq-answer d-none">
+                    Ваши домашние задания проверяются действующими разработчиками, которые очень хорошо погружены
+                    в IT тематику. Они проходят усиленный отбор перед тем, как стать сотрудником нашей команды.
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-white p-0">
+                    <button class="btn btn-link text-primary text-decoration-none w-100 text-start p-3 faq-question">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Можно ли "не справиться" с курсом?
+                    </button>
+                </div>
+                <div class="card-body faq-answer d-none">
+                    Да, если вы будете стабильно просрочивать домашние задания или делать их некачественно - не обращать
+                    внимание на замечания наших преподавателей, вас могут отчислить с курса преждевременно.
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-white p-0">
+                    <button class="btn btn-link text-primary text-decoration-none w-100 text-start p-3 faq-question">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Есть ли ограничения по времени прохождения курса?
+                    </button>
+                </div>
+                <div class="card-body faq-answer d-none">
+                    Большинство наших курсов доступны в течение 6 месяцев с момента покупки. Некоторые программы с
+                    поддержкой преподавателя могут иметь фиксированные сроки - эту
+                    информацию вы найдете на странице конкретного курса.
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-white p-0">
+                    <button class="btn btn-link text-primary text-decoration-none w-100 text-start p-3 faq-question">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Как обеспечивается безопасность моих данных?
+                    </button>
+                </div>
+                <div class="card-body faq-answer d-none">
+                    Мы используем современные методы шифрования данных и защищенные протоколы передачи информации.
+                    Все операции на сайте обрабатываются через проверенные веб технологии,
+                    мы не храним никаких "чувствительных" данных о вас.
+                </div>
+            </div>
+        </div>
+        <div class="card border-primary mt-4">
+                <div class="card-body text-center">
+                    <h3 class="h4 text-primary mb-3">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Остались вопросы?
+                    </h3>
+                    <p class="text-muted mb-4">
+                        Если вы не нашли ответ на свой вопрос, напишите нам напрямую
+                    </p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane me-2"></i> Написать сообщение
+                    </a>
+                </div>
+            </div>
+    </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const questions = document.querySelectorAll('.faq-question');
+
+    questions.forEach(question => {
+        question.addEventListener('click', function() {
+            // Находим соответствующий ответ
+            const answer = this.parentElement.nextElementSibling;
+
+            // Закрываем все открытые ответы
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                if (ans !== answer) {
+                    ans.classList.add('d-none');
+                }
+            });
+
+            // Переключаем текущий ответ
+            answer.classList.toggle('d-none');
+
+            // Плавная анимация
+            if (!answer.classList.contains('d-none')) {
+                answer.style.opacity = 0;
+                answer.style.height = '0';
+                answer.style.transition = 'opacity 0.3s, height 0.3s';
+
+                setTimeout(() => {
+                    answer.style.opacity = 1;
+                    answer.style.height = answer.scrollHeight + 'px';
+                }, 10);
+            }
+        });
+    });
+});
+</script>
+
+<style>
+.faq-answer {
+    overflow: hidden;
+    transition: opacity 0.3s, height 0.3s;
+}
+</style>
+{% endblock %}

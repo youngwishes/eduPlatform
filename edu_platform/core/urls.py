@@ -20,6 +20,8 @@ urlpatterns = [
     path('teacher/dashboard/', views.teacher_dashboard, name='teacher_dashboard'),
     path('assignments/<int:assignment_id>/submissions/', views.submissions_list, name='submissions_list'),
     path('submissions/<int:submission_id>/grade/', views.grade_submission, name='grade_submission'),
+    path('faq/', views.faq, name='faq'),
+    path('my-courses/', views.my_courses, name='my_courses'),
 ]
 
 if settings.DEBUG:

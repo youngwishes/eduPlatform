@@ -1,67 +1,122 @@
 {% extends "core/base.html" %}
 {% block title %}{{ course.title }}{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
+<div class="container py-5">
     <!-- Заголовок курса -->
-    <div class="text-center mb-4">
-        <h1 class="text-primary">{{ course.title }}</h1>
+    <div class="text-center mb-5">
+        <div class="icon-holder mx-auto mb-3">
+            <i class="fas fa-book-open text-primary"></i>
+        </div>
+        <h1 class="display-5 fw-bold text-primary mb-3">{{ course.title }}</h1>
         {% if not enrolled %}
-        <p class="text-muted course-description-container">
-            {{ course.description }}
-        </p>
+        <div class="card border-0 shadow-sm p-4 mb-4">
+            <p class="lead text-muted mb-0">{{ course.description }}</p>
+        </div>
         {% endif %}
     </div>
 
     {% if enrolled %}
     <!-- Материалы курса -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h3>Материалы</h3>
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-header bg-white border-bottom-0 py-3">
+            <h2 class="h4 text-primary mb-0">
+                <i class="fas fa-file-alt me-2"></i> Материалы курса
+            </h2>
         </div>
-        <ul class="list-group list-group-flush">
-            {% for material in course.materials.all %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>{{ material.title }}</span>
-                <a href="{{ material.file.url }}" class="btn btn-outline-success btn-sm" download>
-                    <i class="bi bi-download"></i> Скачать
-                </a>
-            </li>
-            {% empty %}
-            <li class="list-group-item text-muted">Материалы пока не добавлены.</li>
-            {% endfor %}
-        </ul>
+        <div class="card-body p-0">
+            <div class="list-group list-group-flush">
+                {% for material in course.materials.all %}
+                <div class="list-group-item border-0 py-3 d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-pdf text-danger me-3 fa-lg"></i>
+                        <span>{{ material.title }}</span>
+                    </div>
+                    <a href="{{ material.file.url }}" class="btn btn-sm btn-outline-primary" download>
+                        <i class="fas fa-download me-1"></i> Скачать
+                    </a>
+                </div>
+                {% empty %}
+                <div class="list-group-item border-0 py-3 text-muted">
+                    Материалы пока не добавлены
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     <!-- Домашние задания -->
-    <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h3>Домашние задания</h3>
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-bottom-0 py-3">
+            <h2 class="h4 text-primary mb-0">
+                <i class="fas fa-tasks me-2"></i> Домашние задания
+            </h2>
         </div>
-        <ul class="list-group list-group-flush">
-            {% for assignment in course.assignments.all %}
-            <li class="list-group-item">
-                <h5 class="text-primary">{{ assignment.title }}</h5>
-                <p class="text-muted">{{ assignment.description }}</p>
-                <p>
-                    <strong>Срок сдачи:</strong>
-                    <span class="badge bg-danger">{{ assignment.deadline|date:"d M Y H:i" }}</span>
-                </p>
-                <a href="{% url 'assignment_detail' assignment.id %}" class="btn btn-outline-primary btn-sm">
-                    <i class="bi bi-upload"></i> Сдать ДЗ
-                </a>
-            </li>
-            {% empty %}
-            <li class="list-group-item text-muted">Домашние задания пока не добавлены.</li>
-            {% endfor %}
-        </ul>
+        <div class="card-body p-0">
+            <div class="list-group list-group-flush">
+                {% for assignment in course.assignments.all %}
+                <div class="list-group-item border-0 py-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h3 class="h5 text-primary mb-0">{{ assignment.title }}</h3>
+                        <span class="badge bg-danger bg-opacity-10">
+                            <i class="fas fa-clock me-1"></i> {{ assignment.deadline|date:"d M Y H:i" }}
+                        </span>
+                    </div>
+                    <p class="text-muted mb-3">{{ assignment.description }}</p>
+                    {% if user.role == "Student" %}
+
+                    <a href="{% url 'assignment_detail' assignment.id %}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-upload me-1"></i> Сдать задание
+                    </a>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <div class="list-group-item border-0 py-3 text-muted">
+                    Домашние задания пока не добавлены
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
     {% else %}
     <!-- Кнопка записи на курс -->
-    <div class="text-center">
-        <a href="{% url 'enroll' course.id %}" class="btn btn-success btn-lg">
-            <i class="bi bi-box-arrow-in-right"></i> Записаться на курс
-        </a>
+    <div class="text-center mt-5">
+        <div class="card border-primary border-2 py-4 mb-4">
+            <div class="card-body">
+                <h3 class="h4 text-primary mb-3">Готовы начать обучение?</h3>
+                <a href="{% url 'enroll' course.id %}" class="btn btn-primary btn-lg px-4">
+                    <i class="fas fa-user-plus me-2"></i> Записаться на курс
+                </a>
+            </div>
+        </div>
     </div>
     {% endif %}
 </div>
+
+<style>
+    .icon-holder {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: white;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .list-group-item {
+        transition: background-color 0.2s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: var(--light-bg);
+    }
+
+    .badge {
+        padding: 0.35em 0.65em;
+        font-weight: 500;
+    }
+</style>
 {% endblock %}

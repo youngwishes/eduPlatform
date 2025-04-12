@@ -1,89 +1,90 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% block title %}О нас - Edu Platform{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1 class="text-center mb-4">О нас</h1>
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-10">
-            <p class="text-center">
-                Добро пожаловать на <strong>Edu Platform</strong> — место, где обучение становится доступным и увлекательным.
-                Мы предоставляем широкий выбор курсов, учебных материалов и инструментов, чтобы помочь вам достичь ваших образовательных целей.
-            </p>
-        </div>
-    </div>
+        <div class="col-lg-8">
+            <!-- Заголовок -->
+            <div class="text-center mb-5">
+                <h1 class="text-primary mb-3">О нашей образовательной платформе</h1>
+                <p class="lead text-muted">Инновационный подход к онлайн-обучению</p>
+            </div>
 
-    <div class="row mt-4">
-        <!-- Наша миссия -->
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Наша миссия</h5>
-                    <p class="card-text">
-                        Мы стремимся сделать образование доступным для всех, независимо от места проживания и уровня подготовки.
-                        Наша платформа объединяет студентов и преподавателей для создания сообщества, которое вдохновляет на обучение.
-                    </p>
+            <!-- Основной контент -->
+            <div class="card shadow-sm mb-5">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <img src="https://img.freepik.com/free-photo/close-up-joined-hands_23-2147707765.jpg?t=st=1744480247~exp=1744483847~hmac=545a77d16b8d5a90ad0da7aaf75f3ae1cb3a2cb61195f676987347ab5e663b7e&w=996" alt="Наша команда" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="h4 text-primary mb-3">Наша миссия</h2>
+                            <p class="text-muted">
+                                Мы создаем доступное и качественное образование для всех, кто стремится к профессиональному
+                                развитию и личностному росту. Наша платформа объединяет лучших преподавателей
+                                и современные технологии обучения.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Наши ценности -->
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Наши ценности</h5>
-                    <p class="card-text">
-                        Мы верим в силу знаний и поддерживаем честность, профессионализм и инновации в обучении.
-                        Наша команда работает, чтобы предложить лучший опыт для студентов и преподавателей.
-                    </p>
+            <!-- Преимущества -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+                                <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 text-primary">Качество</h3>
+                            <p class="text-muted small">
+                                Курсы разработаны практикующими экспертами с актуальными знаниями
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+                                <i class="fas fa-user-clock fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 text-primary">Гибкость</h3>
+                            <p class="text-muted small">
+                                Учитесь в удобное время с любого устройства
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="bg-primary bg-opacity-10 rounded-circle p-3 d-inline-block mb-3">
+                                <i class="fas fa-headset fa-2x text-primary"></i>
+                            </div>
+                            <h3 class="h5 text-primary">Поддержка</h3>
+                            <p class="text-muted small">
+                                Персональный куратор и помощь на всех этапах обучения
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Почему выбрать нас -->
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0 h-100">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Почему выбрать нас</h5>
-                    <p class="card-text">
-                        Интерактивные курсы, опытные преподаватели и удобная платформа делают Edu Platform вашим идеальным выбором для обучения.
-                        Мы поддерживаем вас на каждом этапе пути.
-                    </p>
+            <!-- CTA блок -->
+            <div class="text-center mt-5">
+                <div class="card border-primary py-4">
+                    <div class="card-body">
+                        <h3 class="h4 text-primary mb-3">Готовы начать обучение?</h3>
+                        <a href="{% url 'home' %}" class="btn btn-primary btn-lg px-4">
+                            <i class="fas fa-book-open me-2"></i> Выбрать курс
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Ключевые факты -->
-    <div class="row mt-5">
-        <div class="col text-center">
-            <h3 class="mb-4">Ключевые факты</h3>
-        </div>
-    </div>
-    <div class="row text-center">
-        <div class="col-md-3">
-            <h4 class="text-primary">10,000+</h4>
-            <p>Зарегистрированных студентов</p>
-        </div>
-        <div class="col-md-3">
-            <h4 class="text-primary">500+</h4>
-            <p>Курсов</p>
-        </div>
-        <div class="col-md-3">
-            <h4 class="text-primary">300+</h4>
-            <p>Опытных преподавателей</p>
-        </div>
-        <div class="col-md-3">
-            <h4 class="text-primary">100%</h4>
-            <p>Довольных студентов</p>
-        </div>
-    </div>
-
-    <!-- Контактная информация -->
-    <div class="row mt-5">
-        <div class="col text-center">
-            <p>Хотите узнать больше? Свяжитесь с нами на странице <a href="{% url 'contact' %}">"Свяжитесь с нами"</a>.</p>
         </div>
     </div>
 </div>

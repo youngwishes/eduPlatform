@@ -64,17 +64,19 @@ def logout_view(request):
     return redirect('home')  # Перенаправляем на главную страницу после выхода
 
 
-@login_required(login_url="/login")
+@login_required(login_url="/login/")
 @role_required('student')
 def enroll(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     Enrollment.objects.get_or_create(student=request.user, course=course)
     return redirect('course_detail', course_id=course.id)
 
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
-@login_required
+
+@login_required(login_url="/login/")
 @role_required('student')
 def assignment_detail(request, assignment_id):
     assignment = get_object_or_404(Assignment, id=assignment_id)
@@ -92,7 +94,7 @@ def assignment_detail(request, assignment_id):
     })
 
 
-@login_required
+@login_required(login_url="/login/")
 @role_required('teacher')
 def course_progress(request, course_id):
     course = get_object_or_404(Course, id=course_id, teacher=request.user)
@@ -102,7 +104,8 @@ def course_progress(request, course_id):
         'progress_data': progress_data,
     })
 
-@login_required
+
+@login_required(login_url="/login/")
 @role_required('teacher')
 def review_submission(request, submission_id):
     submission = get_object_or_404(Submission, id=submission_id, assignment__course__teacher=request.user)
@@ -113,14 +116,16 @@ def review_submission(request, submission_id):
         return redirect('course_progress', course_id=submission.assignment.course.id)
     return render(request, 'core/review_submission.html', {'submission': submission})
 
-@login_required
+
+@login_required(login_url="/login/")
 @role_required('teacher')
 def teacher_dashboard(request):
     # Получение всех курсов, созданных текущим преподавателем
     courses = Course.objects.filter(teacher=request.user)
     return render(request, 'core/teacher_dashboard.html', {'courses': courses})
 
-@login_required
+
+@login_required(login_url="/login/")
 @role_required('teacher')
 def submissions_list(request, assignment_id):
     # Получение всех сданных заданий для конкретного задания
@@ -131,7 +136,8 @@ def submissions_list(request, assignment_id):
         'submissions': submissions
     })
 
-@login_required
+
+@login_required(login_url="/login/")
 @role_required('teacher')
 def grade_submission(request, submission_id):
     # Проверка конкретной работы студента
@@ -144,10 +150,22 @@ def grade_submission(request, submission_id):
     return render(request, 'core/grade_submission.html', {'submission': submission})
 
 
-
-@login_required
+@login_required(login_url="/login/")
 @role_required('teacher')
 def teacher_courses(request):
     """Список курсов, созданных преподавателем."""
     courses = Course.objects.filter(teacher=request.user)
     return render(request, 'core/teacher_courses.html', {'courses': courses})
+
+
+def faq(request):
+    return render(request, 'core/faq.html')
+
+
+@login_required(login_url="/login/")
+@role_required('student')
+def my_courses(request):
+    enrollments = Enrollment.objects.filter(student=request.user).select_related('course')
+    return render(request, 'core/my_courses.html', {
+        'enrollments': enrollments
+    })

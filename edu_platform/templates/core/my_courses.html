@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% extends "core/base.html" %}
+{% block title %}Мои курсы{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <div class="icon-holder mx-auto mb-3">
+            <i class="fas fa-graduation-cap text-primary"></i>
+        </div>
+        <h1 class="display-5 fw-bold text-primary mb-2">Мои курсы</h1>
+        <p class="lead text-muted">Список всех курсов, на которые вы записаны</p>
+    </div>
+
+    <div class="row g-4">
+        {% for enrollment in enrollments %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 border-0 shadow-sm transition-all hover-lift">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h3 class="h5 card-title text-primary mb-0">{{ enrollment.course.title }}</h3>
+                        <span class="badge bg-primary bg-opacity-10 text-primary">
+                            {{ enrollment.enrolled_at|date:"d M Y" }}
+                        </span>
+                    </div>
+                    <p class="card-text text-muted small mb-4">
+                        {{ enrollment.course.description|truncatewords:20 }}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-muted small">
+                            <i class="fas fa-user-tie me-1"></i> {{ enrollment.course.teacher.get_full_name }}
+                        </span>
+                        <a href="{% url 'course_detail' enrollment.course.id %}" 
+                           class="btn btn-sm btn-primary stretched-link">
+                            Перейти
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="text-center py-5">
+                <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+                <h3 class="h4 text-muted">Вы пока не записаны на курсы</h3>
+                <p class="text-muted">Посетите <a href="{% url 'home' %}">каталог курсов</a> чтобы начать обучение</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .hover-lift {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    .icon-holder {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: white;
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .stretched-link::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        content: "";
+    }
+</style>
+{% endblock %}</title>
+</head>
+<body>
+
+</body>
+</html>

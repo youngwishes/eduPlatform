@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+footer {
+    background-color: #e9ecef;
+    padding: 10px 0;
+    color: #6c757d;
+}
+
+footer p {
+    margin: 0;
+}
+
+.list-group-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word; /* Перенос длинных слов */
+    white-space: normal; /* Разрешает перенос текста */
+}
+
+.text-wrap {
+    word-wrap: break-word; /* Переносит длинные слова */
+    overflow-wrap: anywhere; /* Переносит текст на доступное место */
+}
+
+.card-text {
+    white-space: normal; /* Разрешает перенос текста */
+    word-wrap: break-word; /* Перенос длинных слов */
+    overflow-wrap: break-word; /* Альтернативный перенос */
+    max-width: 100%; /* Ограничение ширины */
+}
+
+.card-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.list-group-item {
+    word-wrap: break-word; /* Перенос длинных слов */
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5em;
+}
+.course-description {
+    word-wrap: break-word; /* Для совместимости с устаревшими браузерами */
+    overflow-wrap: break-word; /* Современный стандарт */
+    white-space: pre-wrap; /* Учитывать пробелы и переносы строк */
+}
+/* Ограничение ширины текста в описании курса */
+.course-description-container {
+    word-wrap: break-word; /* Для переноса слов */
+    overflow-wrap: break-word; /* Современный стандарт */
+    white-space: normal; /* Разрешить перенос строк */
+    max-width: 100%; /* Гарантирует, что текст не выйдет за пределы контейнера */
+    text-align: justify; /* Для эстетики */
+}
+
+/* Перенос текста в списке */
+.list-group-item {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.card-text {
+    word-wrap: break-word; /* Перенос текста */
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: justify; /* Выравнивание текста */
+}
+/* Убедитесь, что кнопки справа остаются выровненными */
+.navbar-nav.ms-auto {
+    margin-left: auto; /* Гарантирует сдвиг элементов вправо */
+    display: flex; /* Flexbox для контроля выравнивания */
+    align-items: center; /* Вертикальное выравнивание */
+}
+
+/* Декоративные элементы для кнопок */
+.navbar-nav.ms-auto .nav-link {
+    margin-left: 10px; /* Отступы между кнопками */
+    padding: 8px 12px; /* Пропорциональные внутренние отступы */
+    border-radius: 5px; /* Округленные углы */
+    transition: background-color 0.3s ease; /* Анимация при наведении */
+}
+
+/* Наведение */
+.navbar-nav.ms-auto .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Легкий эффект */
+}
